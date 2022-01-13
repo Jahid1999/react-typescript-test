@@ -10,6 +10,11 @@ import AddTask from './components/AddTask';
 import { useState } from "react";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  {actionCreators}  from './state';
+import { RootState } from './state/reducers';
+
 export interface taskInterface  {
   text: string,
   date: string,
@@ -23,6 +28,12 @@ export interface taskInterfaceWithID {
 }
 
 function App() {
+
+  const state = useSelector((state: RootState) => state.task)
+  const dispatch = useDispatch();
+
+  const {addTask, deleteTask } = bindActionCreators(actionCreators, dispatch)
+
   const [showAddButton, setShowAddButton] = useState<boolean>(false)
   const [tasks, setTasks] = useState<taskInterfaceWithID[]>([
     {
@@ -46,10 +57,10 @@ function App() {
 ])
 
 //Delete Task
-const deleteTask = (id : number) => {
-//  console.log(id);
-    setTasks(tasks.filter((task) => task.id !== id))
-} 
+// const deleteTask = (id : number) => {
+// //  console.log(id);
+//     setTasks(tasks.filter((task) => task.id !== id))
+// } 
 
 //Toggle Reminder
 const toggleReminder = (id : number) => {
@@ -59,13 +70,13 @@ const toggleReminder = (id : number) => {
 
 
 // Add Task
-function addTask(task : taskInterface) : void {
-  console.log(task)
-  let id : number = Math.ceil(Math.random() * 1000) + 1;
+// function addaTask(task : taskInterface) : void {
+//   console.log(task)
+//   let id : number = Math.ceil(Math.random() * 1000) + 1;
 
-  const newTask = {id, ...task}
-  setTasks([...tasks, newTask]);
-}
+//   const newTask = {id, ...task}
+//   setTasks([...tasks, newTask]);
+// }
 
   return (
     <Router>
@@ -77,11 +88,11 @@ function addTask(task : taskInterface) : void {
         <Route path='/' element= {
           <>
              {
-              showAddButton && <AddTask onAdd={addTask} />
+              showAddButton && <AddTask />
              }
             
             {
-              tasks.length > 0 ? <Tasks  tasks={tasks} onDelete = {deleteTask}  onToggle = {toggleReminder} /> :   
+              tasks.length > 0 ? <Tasks  tasks={state} onDelete = {deleteTask}  onToggle = {toggleReminder} /> :   
               'No Tasks Left'
             }
 

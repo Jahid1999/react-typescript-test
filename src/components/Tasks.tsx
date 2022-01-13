@@ -1,6 +1,7 @@
 import Task from './Task'
 import {taskInterfaceWithID} from '../App'
 
+
 interface Props {
   tasks : taskInterfaceWithID [],
   onDelete : (id : number) => void;
@@ -12,7 +13,7 @@ const Tasks:React.FC<Props> = ({tasks, onDelete, onToggle}) => {
       <>
       {
         tasks.map((task)=> (
-            <Task key={task.id} task = {task} onDelete={onDelete} onToggle={onToggle} />
+            <Task key={task.id} task = {task}  onToggle={onToggle} />
         ))
       }
       </>

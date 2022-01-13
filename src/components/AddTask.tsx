@@ -1,19 +1,26 @@
 import { useState } from "react";
 
 import { taskInterface } from '../App'
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  {actionCreators}  from '../state';
 
-interface Props {
-  onAdd: (task: taskInterface) => void;
-}
-const AddTask:React.FC<Props> = ({onAdd}) => {
+// interface Props {
+//   onAdd: (task: taskInterface) => void;
+// }
+const AddTask:React.FC = () => {
   const [text, setText] = useState('')
   const [date, setDate] = useState('')
   const [reminder, setReminder] = useState(false)
 
+  const dispatch = useDispatch();
+
+  const {addTask } = bindActionCreators(actionCreators, dispatch)
+
   const onSubmit = (e : any) => {
     e.preventDefault()
 
-    onAdd({text, date, reminder});
+    addTask({text, date, reminder});
 
     setText('')
     setDate('')
@@ -34,7 +41,7 @@ const AddTask:React.FC<Props> = ({onAdd}) => {
               <input type='checkbox' checked={reminder} onChange={(e) => { setReminder(e.currentTarget.checked)}} />
           </div>
 
-          <input type='submit' className="btn btn-block" value='Save' />
+          <input type='submit' style={{backgroundColor : 'black', color: 'white'}} className="btn btn-block" value='Save' />
       </form>
     );
   }
