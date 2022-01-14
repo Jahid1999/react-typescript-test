@@ -18,3 +18,12 @@ export const deleteTask = (id: number) => {
         })
     }
 }
+
+export const searchTask = (searchKey: string) => {
+    return (dispatch: Dispatch) => {
+        dispatch({
+            type: "searchTask",
+            payload: searchKey
+        })
+    }
+}

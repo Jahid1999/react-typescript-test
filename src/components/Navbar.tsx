@@ -1,8 +1,18 @@
 import {Navbar, Nav, NavDropdown, Container, Form, FormControl, Button} from 'react-bootstrap'
 import {Link, Router} from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  {actionCreators}  from '../state';
 function Navibar() {
+    const dispatch = useDispatch();
+    const {searchTask } = bindActionCreators(actionCreators, dispatch)
+
+    const filterTask = (e: any) => {
+        console.log(e.target.value)
+        searchTask(e.target.value);
+    }
     return (
-        
+
         <Navbar bg="dark" variant={"dark"} expand="sm">
             {/* <Container> */}
             
@@ -34,6 +44,7 @@ function Navibar() {
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
+                    onChange={filterTask}
                     />
                     <Button variant="outline-success" >Search</Button>
                 </Form>

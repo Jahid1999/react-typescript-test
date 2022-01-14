@@ -10,9 +10,7 @@ import AddTask from './components/AddTask';
 import { useState } from "react";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
-import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  {actionCreators}  from './state';
+import { useSelector } from 'react-redux';
 import { RootState } from './state/reducers';
 
 export interface taskInterface  {
@@ -28,55 +26,18 @@ export interface taskInterfaceWithID {
 }
 
 function App() {
-
-  const state = useSelector((state: RootState) => state.task)
-  const dispatch = useDispatch();
-
-  const {addTask, deleteTask } = bindActionCreators(actionCreators, dispatch)
+  
+  const state = useSelector((state: RootState) => state.task.tasks)
 
   const [showAddButton, setShowAddButton] = useState<boolean>(false)
-  const [tasks, setTasks] = useState<taskInterfaceWithID[]>([
-    {
-        id:1,
-        text:'Task 1',
-        date: '03-01-2022',
-        reminder: true,
-    },
-    {
-        id:2,
-        text:'Task 2',
-        date: '03-01-2022',
-        reminder: true,
-    },
-    {
-        id:3,
-        text:'Task 3',
-        date: '03-01-2022',
-        reminder: false,
-    },
-])
+  const [tasks, setTasks] = useState<taskInterfaceWithID[]>(state)
 
-//Delete Task
-// const deleteTask = (id : number) => {
-// //  console.log(id);
-//     setTasks(tasks.filter((task) => task.id !== id))
-// } 
 
-//Toggle Reminder
-const toggleReminder = (id : number) => {
-  //  console.log(id);
-  setTasks(tasks.map((task) => task.id ==id ? {...task, reminder: !task.reminder} : task))
+  //Toggle Reminder
+  const toggleReminder = (id : number) => {
+    setTasks(tasks.map((task) => task.id ==id ? {...task, reminder: !task.reminder} : task))
   } 
 
-
-// Add Task
-// function addaTask(task : taskInterface) : void {
-//   console.log(task)
-//   let id : number = Math.ceil(Math.random() * 1000) + 1;
-
-//   const newTask = {id, ...task}
-//   setTasks([...tasks, newTask]);
-// }
 
   return (
     <Router>
@@ -87,12 +48,10 @@ const toggleReminder = (id : number) => {
       <Routes>
         <Route path='/' element= {
           <>
-             {
-              showAddButton && <AddTask />
-             }
+             { showAddButton && <AddTask /> }
             
             {
-              tasks.length > 0 ? <Tasks  tasks={state} onDelete = {deleteTask}  onToggle = {toggleReminder} /> :   
+              state.length > 0 ? <Tasks onToggle = {toggleReminder} /> :   
               'No Tasks Left'
             }
 

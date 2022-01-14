@@ -14,6 +14,11 @@ interface DeleteTaskAction {
     payload: number
 }
 
+interface SearchTaskAction {
+    type: "searchTask",
+    payload: string
+}
+
 // export default AddTaskAction;
 
-export type Action = AddTaskAction | DeleteTaskAction;
+export type Action = AddTaskAction | DeleteTaskAction | SearchTaskAction;

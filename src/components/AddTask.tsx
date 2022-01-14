@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { taskInterface } from '../App'
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  {actionCreators}  from '../state';
