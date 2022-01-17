@@ -13,7 +13,7 @@ const Tasks:React.FC<Props> = ({onToggle}) => {
     return (
       <>
       {
-        serachKey == "" ? (state.map((task)=> (
+        serachKey === "" ? (state.map((task)=> (
           <Task key={task.id} task = {task}  onToggle={onToggle} />
       ))) : (state.filter((s) => s.text.startsWith(serachKey)).map((task)=> (
           <Task key={task.id} task = {task}  onToggle={onToggle} />

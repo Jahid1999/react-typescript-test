@@ -7,9 +7,6 @@ interface Props {
     showAdd: boolean
 }
 export const Header: React.FC<Props> =  ({title, onAddClick, showAdd}) => {
-     const onClick= () => {
-        console.log('clicked')
-    }
     const location = useLocation();
     return (
       <header className="header">

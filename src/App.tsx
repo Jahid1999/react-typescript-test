@@ -7,6 +7,7 @@ import Navibar from './components/Navbar';
 import About from './components/About';
 import Footer from './components/Footer';
 import AddTask from './components/AddTask';
+import Users from './components/Users';
 import { useState } from "react";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
@@ -30,12 +31,12 @@ function App() {
   const state = useSelector((state: RootState) => state.task.tasks)
 
   const [showAddButton, setShowAddButton] = useState<boolean>(false)
-  const [tasks, setTasks] = useState<taskInterfaceWithID[]>(state)
+
 
 
   //Toggle Reminder
   const toggleReminder = (id : number) => {
-    setTasks(tasks.map((task) => task.id ==id ? {...task, reminder: !task.reminder} : task))
+    // setTasks(state.map((task) => task.id ==id ? {...task, reminder: !task.reminder} : task))
   } 
 
 
@@ -58,6 +59,7 @@ function App() {
           </>
         } />
         <Route path='/about' element={<About />} />
+        <Route path='/users' element={<Users />} />
       </Routes>
 
       <Footer />

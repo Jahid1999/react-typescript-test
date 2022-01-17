@@ -1,4 +1,3 @@
-import { searchTask } from "../action-creators";
 import {Action} from "../actions";
 
 const initialState = {
@@ -57,9 +56,7 @@ const reducer = (state: IState = initialState, action: Action): IState => {
         default : return state;
         
     }
-    
 
-    return state
 }
 
 export default reducer

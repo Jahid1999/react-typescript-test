@@ -1,5 +1,5 @@
-import {Navbar, Nav, NavDropdown, Container, Form, FormControl, Button} from 'react-bootstrap'
-import {Link, Router} from 'react-router-dom'
+import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  {actionCreators}  from '../state';
@@ -34,8 +34,8 @@ function Navibar() {
                         Something else here
                     </NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link href="#" disabled>
-                    Link
+                    <Nav.Link as={Link} to={"/users"} >
+                        Users
                     </Nav.Link>
                 </Nav>
                 <Form className="d-flex">
