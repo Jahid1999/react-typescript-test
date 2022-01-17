@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 const api = axios.create({baseURL:'https://reqres.in/api'})

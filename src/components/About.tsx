@@ -1,3 +1,4 @@
+import React from 'react';
 import {Link} from 'react-router-dom'
 const About= () => {
    
@@ -9,4 +10,4 @@ const About= () => {
     );
   }
 
-export default About;
+export default React.memo(About);

@@ -5,6 +5,7 @@ import {taskInterfaceWithID} from '../App'
 import { useDispatch } from 'react-redux';
 
 import {deleteTask} from '../state-redux-toolkit/features/taskSlice'
+import React from "react";
 
 interface Props {
   task: taskInterfaceWithID,
@@ -37,4 +38,4 @@ const Task:React.FC<Props> =({task, onToggle}) => {
     );
   }
 
-export default Task;
+export default React.memo(Task);

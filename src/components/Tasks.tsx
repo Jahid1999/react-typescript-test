@@ -1,7 +1,7 @@
 import Task from './Task'
-import { useSelector } from 'react-redux';
 // import { RootState } from '../state/reducers';
-import { RootState, useSelectorTyped } from '../state-redux-toolkit/store';
+import { useSelectorTyped } from '../state-redux-toolkit/store';
+import React from 'react';
 
 interface Props {
   onToggle : (id : number) => void;
@@ -26,4 +26,4 @@ const Tasks:React.FC<Props> = ({onToggle}) => {
     );
   }
 
-export default Tasks;
+export default React.memo(Tasks) ;

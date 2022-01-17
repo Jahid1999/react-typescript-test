@@ -2,6 +2,7 @@ import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstr
 import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import {search} from '../state-redux-toolkit/features/taskSlice'
+import React from 'react';
 function Navibar() {
     const dispatch = useDispatch();
 
@@ -52,4 +53,4 @@ function Navibar() {
     );
   }
 
-export default Navibar;
+export default React.memo(Navibar);

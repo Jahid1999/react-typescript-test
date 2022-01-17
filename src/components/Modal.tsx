@@ -1,3 +1,4 @@
+import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 interface Props {
@@ -33,4 +34,4 @@ const Example:React.FC<Props> = ({show, onHide}) => {
   }
   
 //   render(<Example />);
-export default Example;
+export default React.memo(Example);

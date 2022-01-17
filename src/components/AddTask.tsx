@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 
 import { useDispatch } from 'react-redux';
@@ -40,4 +41,4 @@ const AddTask:React.FC = () => {
     );
   }
 
-export default AddTask;
+export default React.memo(AddTask) ;
