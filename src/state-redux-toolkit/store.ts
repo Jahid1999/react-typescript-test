@@ -1,4 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
+import { createSelectorHook } from 'react-redux'
 import taskReducer from './features/taskSlice'
 import userReducer from './features/userSlice'
 
@@ -12,3 +13,5 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
+
+export const useSelectorTyped = createSelectorHook<RootState>();

@@ -11,7 +11,7 @@ export const fetchUsers = () => {
                 type: ActionType.FETCH_USERS,
                 payload : res.data.data
             })
-          })
+        })
     
     }
 }

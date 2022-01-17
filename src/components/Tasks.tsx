@@ -1,22 +1,22 @@
 import Task from './Task'
 import { useSelector } from 'react-redux';
 // import { RootState } from '../state/reducers';
-import { RootState } from '../state-redux-toolkit/store';
+import { RootState, useSelectorTyped } from '../state-redux-toolkit/store';
 
 interface Props {
   onToggle : (id : number) => void;
 }
 const Tasks:React.FC<Props> = ({onToggle}) => {
 
-  const state = useSelector((state: RootState) => state.tasks.tasks)
-  const serachKey = useSelector((state: RootState) => state.tasks.searchKey)
+  const store = useSelectorTyped((state) => ({tasks: state.tasks.tasks, searchKey: state.tasks.searchKey}))
+  // const serachKey = useSelector((state: RootState) => state.tasks.searchKey)
     
     return (
       <>
       {
-        serachKey === "" ? (state.map((task)=> (
+        store.searchKey === "" ? (store.tasks.map((task)=> (
           <Task key={task.id} task = {task}  onToggle={onToggle} />
-      ))) : (state.filter((s) => s.text.startsWith(serachKey)).map((task)=> (
+      ))) : (store.tasks.filter((s) => s.text.startsWith(store.searchKey)).map((task)=> (
           <Task key={task.id} task = {task}  onToggle={onToggle} />
       ))
       )
