@@ -1,6 +1,6 @@
-
+import { ActionType } from '../types'
 interface FetchUserAction {
-    type: "fetchUsers",
+    type: ActionType.FETCH_USERS,
     payload: Array <any>
 }
 

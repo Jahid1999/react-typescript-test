@@ -12,7 +12,8 @@ import { useState } from "react";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import { useSelector } from 'react-redux';
-import { RootState } from './state/reducers';
+// import { RootState } from './state/reducers';
+import { RootState } from './state-redux-toolkit/store';
 
 export interface taskInterface  {
   text: string,
@@ -28,7 +29,7 @@ export interface taskInterfaceWithID {
 
 function App() {
   
-  const state = useSelector((state: RootState) => state.task.tasks)
+  const state = useSelector((state: RootState) => state.tasks.tasks)
 
   const [showAddButton, setShowAddButton] = useState<boolean>(false)
 

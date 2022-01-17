@@ -1,4 +1,5 @@
 import {Action} from "../actions";
+import { ActionType } from '../types'
 
 const initialState = {
     tasks: [
@@ -38,18 +39,18 @@ interface taskInterfaceWithID {
 const reducer = (state: IState = initialState, action: Action): IState => {
 
     switch(action.type) {
-        case "addTask": {
+        case ActionType.ADD_TASK: {
             let id : number = Math.ceil(Math.random() * 1000) + 1;
 
             const newTask = {id, ...action.payload}
             state.tasks = [...state.tasks, newTask]
             return state;
         }
-        case "deleteTask" : {
+        case ActionType.DELETE_TASK : {
             state.tasks = state.tasks.filter((s) => s.id !== action.payload)
             return state;
         }
-        case "searchTask" : {
+        case ActionType.SEARCH : {
             return {...state, searchKey: action.payload}
 
         }

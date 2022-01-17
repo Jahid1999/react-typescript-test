@@ -1,12 +1,9 @@
 import { useState } from "react";
 
 import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  {actionCreators}  from '../state';
 
-// interface Props {
-//   onAdd: (task: taskInterface) => void;
-// }
+import {addTask} from '../state-redux-toolkit/features/taskSlice'
+
 const AddTask:React.FC = () => {
   const [text, setText] = useState('')
   const [date, setDate] = useState('')
@@ -14,12 +11,10 @@ const AddTask:React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const {addTask } = bindActionCreators(actionCreators, dispatch)
-
   const onSubmit = (e : any) => {
     e.preventDefault()
 
-    addTask({text, date, reminder});
+    dispatch(addTask({text, date, reminder}));
 
     setText('')
     setDate('')

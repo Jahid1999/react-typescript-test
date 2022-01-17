@@ -2,52 +2,24 @@ import { useEffect } from "react";
 import { Table } from 'react-bootstrap'
 
 import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  {userActionCreators}  from '../state';
 import { useSelector } from 'react-redux';
-import { RootState } from '../state/reducers';
-
-
-// interface dataType {
-//     id: number,
-//     first_name: string,
-//     last_name: string,
-//     email: string
-// }
+import { RootState } from '../state-redux-toolkit/store';
+import {fetchUsers} from '../state-redux-toolkit/features/userSlice'
 
 const Users= () => {
 
     const dispatch = useDispatch();
-    const {fetchUsers } = bindActionCreators(userActionCreators, dispatch)
 
     const users = useSelector((state: RootState) => state.users)
-    const serachKey = useSelector((state: RootState) => state.task.searchKey)
+    const serachKey = useSelector((state: RootState) => state.tasks.searchKey)
 
     useEffect(() => {
-        fetchUsers()
+        dispatch(fetchUsers())
+        console.log(users);
+        
       }, []);
 
-    //   const table_data = users.map((user) => { 
-    //       return (
-    //         <tr key={user["id"]}>
-    //             <td>{user['id']}</td>
-    //             <td>{user['first_name']}</td>
-    //             <td>{user['last_name']}</td>
-    //             <td>{user['email']}</td>
-    //         </tr>
-    //       )   
-    // })
-
-    // const table_data = users.map((user : any) => { 
-    //     return (
-    //       <tr key={user.id}>
-    //           <td>{user.id}</td>
-    //           <td>{user.first_name}</td>
-    //           <td>{user.last_name}</td>
-    //           <td>{user.email}</td>
-    //       </tr>
-    //     )   
-    // })
+  
     return (
       <div>
           <Table striped bordered hover>
