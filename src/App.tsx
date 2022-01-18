@@ -14,6 +14,8 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 // import { RootState } from './state/reducers';
 import { RootState } from './state-redux-toolkit/store';
+import Modals from './components/Modals';
+import UserManagement from './components/UserManagement';
 
 export interface taskInterface  {
   text: string,
@@ -54,8 +56,9 @@ function App() {
         } />
         <Route path='/about' element={<About />} />
         <Route path='/users' element={<Users />} />
+        <Route path='/users/management' element={<UserManagement />} />
       </Routes>
-
+      <Modals />
       <Footer />
     </div>
     </Router>

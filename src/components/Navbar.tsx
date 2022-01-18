@@ -24,16 +24,19 @@ function Navibar() {
                 >
                     <Nav.Link href="#action1">Home</Nav.Link>
                     <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
-                    <NavDropdown title="Link" id="navbarScrollingDropdown">
+                    {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action5">
                         Something else here
                     </NavDropdown.Item>
-                    </NavDropdown>
+                    </NavDropdown> */}
                     <Nav.Link as={Link} to={"/users"} >
                         Users
+                    </Nav.Link>
+                    <Nav.Link as={Link} to={"/users/management"} >
+                        User Management
                     </Nav.Link>
                 </Nav>
                 <Form className="d-flex">

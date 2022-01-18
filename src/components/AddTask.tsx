@@ -29,7 +29,7 @@ const AddTask:React.FC = () => {
           </div>
           <div className="form-control">
               <label>Date</label>
-              <input type='text' placeholder="Add Date" value={date} onChange={(e) => { setDate(e.target.value)}} />
+              <input type='date' placeholder="Add Date" value={date} onChange={(e) => { setDate(e.target.value)}} />
           </div>
           <div className="form-control form-control-check">
               <label>Reminder</label>

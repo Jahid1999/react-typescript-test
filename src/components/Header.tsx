@@ -12,7 +12,7 @@ export const Header: React.FC<Props> =  ({title, onAddClick, showAdd}) => {
     return (
       <header className="header">
         {
-          location.pathname==='/users' ? <h1>List of Users</h1> :<h1>{title}</h1>
+          location.pathname=== ('/users' || '/users/management') ? <h1>List of Users</h1> :<h1>{title}</h1>
         }
           
           { 

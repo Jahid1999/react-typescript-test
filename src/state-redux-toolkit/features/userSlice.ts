@@ -5,8 +5,10 @@ const api = axios.create({baseURL:'https://reqres.in/api'})
 
 interface InitiInterface {
     users : IUser []
+    selectedUsers: IUser[]
+    isAPICalling: boolean
 }
-const initialState : InitiInterface = { users:[]};
+const initialState : InitiInterface = { users:[], selectedUsers:[], isAPICalling:false};
 
 export const fetchUsers = async () => {
     const response = await  api.get<IUserResponse>('/users?page=2')
@@ -36,6 +38,12 @@ export const userSlice = createSlice({
    fetchUsers: (state, action : PayloadAction<IUser[]>) => {
     state.users = action.payload
    },
+   makeIsAPICallingTrue :(state) => {
+       state.isAPICalling = true
+   },
+   makeIsAPICallingFalse :(state) => {
+    state.isAPICalling = false
+}
   },
 //   extraReducers(builder) {
 //     builder.addCase(fetchUsers.fulfilled, (state, action) => {

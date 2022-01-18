@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-import { Spinner, Table } from 'react-bootstrap'
-
-import { useDispatch } from 'react-redux';
+import { Dropdown, DropdownButton, Spinner, Table } from 'react-bootstrap'
 import {useSelectorTyped } from '../state-redux-toolkit/store';
-import {actioUsers, fetchUsers} from '../state-redux-toolkit/features/userSlice'
-
-import axios from 'axios';
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const api = axios.create({baseURL:'https://reqres.in/api'})
+import Select from 'react-select'
 
 export interface IUser {
   id: number;
@@ -19,51 +14,52 @@ export interface IUser {
   avatar: string;
 }
 
-export interface IUserResponse {
-  page: number;
-  per_page: number;
-  total: number;
-  total_pages: number;
-  data: IUser[];
-}
-
 const Users= () => {
 
-    const store = useSelectorTyped((state) => ({users:state.users.users , searchKey:state.tasks.searchKey, isAPICallling: state.users.isAPICalling}))
+    const store = useSelectorTyped((state) => ({users:state.users.users , searchKey:state.tasks.searchKey, isAPICalling: state.users.isAPICalling}))
     const [users, setUsers] = useState<IUser[]>([])
+    const [options, setOptions] = useState<IUser[]>([])
 
-    const dispatch = useDispatch()
+
+    const [selectedOption, setSelectedOption] = useState<IUser>({} as IUser);
+
+   const handleChange = (selectedOption : any) => {
+      let selectedCustomers = [...users, selectedOption]   
+      setUsers(selectedCustomers)   
+
+      let updatedOptions = options.filter(op => op.id != selectedOption.id)
+      setOptions(updatedOptions)
+    };
 
     const navigate = useNavigate()
-    // const fetchUsers = async () => {
-    //       const response = await  api.get<IUserResponse>('/users?page=2')
-    //       return response.data.data
-    // }
-
-    useEffect(() => {
-        dispatch(actioUsers.makeIsAPICallingTrue())
-        fetchUsers().then(res => {
-          // setUsers(res)
-          dispatch(actioUsers.fetchUsers(res))
-          dispatch(actioUsers.makeIsAPICallingFalse())      
-        })  
-      }, []);
 
       const gotoHome = () => {
         navigate('/')
       }
-  
+
+    useEffect(() => {
+        setOptions(store.users)
+    }, []);
+  //users.length? store.users : store.users.filter(u => {users.find(ur=> ur.id == u.id)})
     return (
       <div>
         {
-          store.isAPICallling && (
+          store.isAPICalling && (
           <div className="row"> 
             <div className="col-2"> <h4>Loading....</h4></div>
             <div className="col-3">  <Spinner style={{marginBottom:27}} animation="border" variant="danger" /> </div>
             
           </div>)
         }
-        <button className="btn btn-block" onClick={gotoHome}>Go to Home</button>
+        <button className="btn btn-block" style={{backgroundColor:'gray'}} onClick={gotoHome}>Go to Home</button>
+       <Select options={options} 
+       value={selectedOption}
+        onChange={handleChange} getOptionLabel={e => e?.first_name} />
+
+        <br />
+        <hr />
+        <h4>Selected Customer's Table</h4>
+
           <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -76,14 +72,14 @@ const Users= () => {
                 <tbody>
                    {
                      store.searchKey ==="" ?
-                     store.users.map(u =>
+                     users.map(u =>
                         <tr key={u.id}>
                           <td>{u.id}</td>
                           <td>{u.first_name}</td>
                           <td>{u.last_name}</td>
                           <td>{u.email}</td> 
                         </tr>   
-                        ) : store.users.filter(user => user.first_name.startsWith(store.searchKey)).map(u =>
+                        ) : users.filter(user => user.first_name.startsWith(store.searchKey)).map(u =>
                           <tr key={u.id}>
                             <td>{u.id}</td>
                             <td>{u.first_name}</td>
