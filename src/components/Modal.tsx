@@ -2,36 +2,15 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 interface Props {
-  show: boolean,
-  onHide: () => void;
+  children: JSX.Element,
 }
-const Example:React.FC<Props> = ({show, onHide}) => { 
-  console.log(show)
+const ParentModal:React.FC<Props> = ({children}) => { 
     return (
       <>
-        <Modal
-          show={show}
-          onHide={() => {onHide()}}
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Modal Title</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Hello from Modal.
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => {onHide()}}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={() => {onHide()}}>
-            Save Changes
-          </Button>
-          </Modal.Footer>
-        </Modal>
+       {children}
       </>
     );
   }
   
 //   render(<Example />);
-export default React.memo(Example);
+export default React.memo(ParentModal);

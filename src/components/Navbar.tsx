@@ -1,13 +1,13 @@
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import {search} from '../state-redux-toolkit/features/taskSlice'
+import {actionTask} from '../state-redux-toolkit/features/taskSlice'
 import React from 'react';
 function Navibar() {
     const dispatch = useDispatch();
 
     const filterTask = (e: any) => {
-        dispatch(search(e.target.value));
+        dispatch(actionTask.search(e.target.value));
     }
     return (
 

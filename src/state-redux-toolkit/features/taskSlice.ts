@@ -21,7 +21,8 @@ const initialState = {
             reminder: false,
         },
     ],
-    searchKey : ""
+    searchKey : "",
+    showTaskModal: false
 };
 
 
@@ -40,10 +41,21 @@ export const taskSlice = createSlice({
    },
    deleteTask: (state, action) => {
     state.tasks = state.tasks.filter((s) => s.id !== action.payload)
-   }
+   },
+   toggleTask: (state, action) => {
+    state.tasks.map((task) => task.id ==action.payload ? {...task, reminder: !task.reminder} : task)
+   },
+   handleShowTask:(state) => {
+       state.showTaskModal = true
+       console.log(state.showTaskModal)
+   },
+   handleHideTask:(state) => {
+    state.showTaskModal = false
+}
+
   },
 });
 
-export const { addTask, search, deleteTask } = taskSlice.actions;
+export const actionTask = taskSlice.actions;
 
 export default taskSlice.reducer;

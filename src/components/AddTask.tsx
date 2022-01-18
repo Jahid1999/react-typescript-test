@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { useDispatch } from 'react-redux';
 
-import {addTask} from '../state-redux-toolkit/features/taskSlice'
+import {actionTask} from '../state-redux-toolkit/features/taskSlice'
 
 const AddTask:React.FC = () => {
   const [text, setText] = useState('')
@@ -15,7 +15,7 @@ const AddTask:React.FC = () => {
   const onSubmit = (e : any) => {
     e.preventDefault()
 
-    dispatch(addTask({text, date, reminder}));
+    dispatch(actionTask.addTask({text, date, reminder}));
 
     setText('')
     setDate('')
