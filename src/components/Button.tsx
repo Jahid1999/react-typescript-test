@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
   color: string,
   text : string,
@@ -11,4 +13,4 @@ const Button:React.FC<Props> = ({color, text, onClick}) => {
     );
   }
 
-export default Button;
+export default React.memo(Button);

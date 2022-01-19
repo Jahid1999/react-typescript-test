@@ -1,22 +1,23 @@
 import Task from './Task'
-import { useSelector } from 'react-redux';
-import { RootState } from '../state/reducers';
+// import { RootState } from '../state/reducers';
+import { useSelectorTyped } from '../state-redux-toolkit/store';
+import React from 'react';
 
-interface Props {
-  onToggle : (id : number) => void;
-}
-const Tasks:React.FC<Props> = ({onToggle}) => {
+// interface Props {
+//   onToggle : (id : number) => void;
+// }
+const Tasks:React.FC = () => {
 
-  const state = useSelector((state: RootState) => state.task.tasks)
-  const serachKey = useSelector((state: RootState) => state.task.searchKey)
+  const store = useSelectorTyped((state) => ({tasks: state.tasks.tasks, searchKey: state.tasks.searchKey}))
+  // const serachKey = useSelector((state: RootState) => state.tasks.searchKey)
     
     return (
       <>
       {
-        serachKey === "" ? (state.map((task)=> (
-          <Task key={task.id} task = {task}  onToggle={onToggle} />
-      ))) : (state.filter((s) => s.text.startsWith(serachKey)).map((task)=> (
-          <Task key={task.id} task = {task}  onToggle={onToggle} />
+        store.searchKey === "" ? (store.tasks.map((task)=> (
+          <Task key={task.id} task = {task}/>
+      ))) : (store.tasks.filter((s) => s.text.startsWith(store.searchKey)).map((task)=> (
+          <Task key={task.id} task = {task} />
       ))
       )
         
@@ -25,4 +26,4 @@ const Tasks:React.FC<Props> = ({onToggle}) => {
     );
   }
 
-export default Tasks;
+export default React.memo(Tasks) ;

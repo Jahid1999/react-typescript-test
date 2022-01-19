@@ -1,3 +1,4 @@
+import { ActionType } from '../types'
 
 export interface taskInterface  {
     text: string,
@@ -5,17 +6,17 @@ export interface taskInterface  {
     reminder: boolean,
   }
 interface AddTaskAction {
-    type: "addTask",
+    type: ActionType.ADD_TASK,
     payload: taskInterface
 }
 
 interface DeleteTaskAction {
-    type: "deleteTask",
+    type: ActionType.DELETE_TASK,
     payload: number
 }
 
 interface SearchTaskAction {
-    type: "searchTask",
+    type: ActionType.SEARCH,
     payload: string
 }
 

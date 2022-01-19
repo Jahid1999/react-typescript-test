@@ -1,10 +1,11 @@
 import { Dispatch } from "redux"
 import {taskInterface} from "../actions"
+import { ActionType } from '../types'
 
 export const addTask = (task: taskInterface) => {
     return (dispatch: Dispatch) => {
         dispatch({
-            type: "addTask",
+            type: ActionType.ADD_TASK,
             payload: task
         })
     }
@@ -13,7 +14,7 @@ export const addTask = (task: taskInterface) => {
 export const deleteTask = (id: number) => {
     return (dispatch: Dispatch) => {
         dispatch({
-            type: "deleteTask",
+            type: ActionType.DELETE_TASK,
             payload: id
         })
     }
@@ -22,7 +23,7 @@ export const deleteTask = (id: number) => {
 export const searchTask = (searchKey: string) => {
     return (dispatch: Dispatch) => {
         dispatch({
-            type: "searchTask",
+            type: ActionType.SEARCH,
             payload: searchKey
         })
     }

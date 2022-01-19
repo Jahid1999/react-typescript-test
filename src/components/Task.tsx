@@ -1,42 +1,46 @@
 import { FaTimes } from "react-icons/fa";
-import { useState } from "react";
-import Modal from './Modal'
 import {taskInterfaceWithID} from '../App'
 import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  {actionCreators}  from '../state';
+
+import {actionTask} from '../state-redux-toolkit/features/taskSlice'
+import React from "react";
+import {StaticData} from './TaskModal'
 
 interface Props {
   task: taskInterfaceWithID,
   // onDelete : (id : number) => void;
-  onToggle : (id : number) => void;
+  // onToggle : (id : number) => void;
 }
-const Task:React.FC<Props> =({task, onToggle}) => {
-  const [show, setShow] = useState(false);
-  const [modalKey, setModalKey] = useState(Date.now() + '')
+
+
+const Task:React.FC<Props> =({task}) => {
+  // const [show, setShow] = useState(false);
+  // const [modalKey, setModalKey] = useState(Date.now() + '')
 
   const dispatch = useDispatch();
 
-  const {deleteTask } = bindActionCreators(actionCreators, dispatch)
+  // const handleClose = () => {
+  //   setShow(false);
+  //   setModalKey(Date.now() + '')
+  // }
 
-  const handleClose = () => {
-    setShow(false);
-    setModalKey(Date.now() + '')
-    console.log('eije ami--' + show );
-  }
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    StaticData.selectedTask.task = task
+    // StaticData.update(task)
+    console.log(task);
+    
+    dispatch(actionTask.handleShowTask())
+  };
     return (
       <>  
-       <div className={`task ${task.reminder? 'reminder' : ''}`} onDoubleClick={ () => {onToggle(task.id)}} onClick={handleShow} >
+        <div className={`task ${task.reminder? 'reminder' : ''}`} onDoubleClick={ () => {dispatch(actionTask.toggleTask(task.id))}} onClick={handleShow} >
           <h3> {task.text} <FaTimes style={{color:'red', cursor:'pointer'}} 
-          onClick={() => {deleteTask(task.id)}} /></h3>
-          <p> {task.date}</p>
-          
-      </div>
-      <Modal key={modalKey} show={show} onHide={handleClose}/>
+          onClick={() => {dispatch(actionTask.deleteTask(task.id))}} /></h3>
+          <p> {task.date}</p>   
+        </div>    
       </>
      
     );
   }
 
-export default Task;
+export default React.memo(Task);

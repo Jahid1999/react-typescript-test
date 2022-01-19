@@ -1,12 +1,10 @@
+import React from "react";
 import { useState } from "react";
 
 import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  {actionCreators}  from '../state';
 
-// interface Props {
-//   onAdd: (task: taskInterface) => void;
-// }
+import {actionTask} from '../state-redux-toolkit/features/taskSlice'
+
 const AddTask:React.FC = () => {
   const [text, setText] = useState('')
   const [date, setDate] = useState('')
@@ -14,12 +12,10 @@ const AddTask:React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const {addTask } = bindActionCreators(actionCreators, dispatch)
-
   const onSubmit = (e : any) => {
     e.preventDefault()
 
-    addTask({text, date, reminder});
+    dispatch(actionTask.addTask({text, date, reminder}));
 
     setText('')
     setDate('')
@@ -33,7 +29,7 @@ const AddTask:React.FC = () => {
           </div>
           <div className="form-control">
               <label>Date</label>
-              <input type='text' placeholder="Add Date" value={date} onChange={(e) => { setDate(e.target.value)}} />
+              <input type='date' placeholder="Add Date" value={date} onChange={(e) => { setDate(e.target.value)}} />
           </div>
           <div className="form-control form-control-check">
               <label>Reminder</label>
@@ -45,4 +41,4 @@ const AddTask:React.FC = () => {
     );
   }
 
-export default AddTask;
+export default React.memo(AddTask) ;

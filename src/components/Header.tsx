@@ -1,5 +1,6 @@
 import Button from './Button'
 import {useLocation} from 'react-router-dom'
+import React from 'react';
 
 interface Props {
     title?: string,
@@ -10,11 +11,13 @@ export const Header: React.FC<Props> =  ({title, onAddClick, showAdd}) => {
     const location = useLocation();
     return (
       <header className="header">
-          <h1>{title}</h1>
+        {
+          location.pathname=== ('/users' || '/users/management') ? <h1>List of Users</h1> :<h1>{title}</h1>
+        }
+          
           { 
             location.pathname === '/' && (
-              onAddClick && <Button color={showAdd ? 'red' : 'green'} text={showAdd ? 'Close' : 'Add'} 
-            onClick={onAddClick}/>
+              onAddClick && <Button color={showAdd ? 'red' : 'green'} text={showAdd ? 'Close' : 'Add'} onClick={onAddClick}/>
             )
             
           }
@@ -27,4 +30,4 @@ export const Header: React.FC<Props> =  ({title, onAddClick, showAdd}) => {
       title: 'Task Tracker'
   }
   
-  export default Header;
+  export default React.memo(Header) ;
