@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch } from 'react-redux';
 import {taskInterfaceWithID} from '../App'
 import {actionTask} from '../state-redux-toolkit/features/taskSlice'
 import { useSelectorTyped } from '../state-redux-toolkit/store';
@@ -22,7 +22,7 @@ const TaskModal:React.FC = () => {
   // const [show, setShow] = useState(false);
   // const [modalKey, setModalKey] = useState(Date.now() + '')
 
-  const store = useSelectorTyped((state) => ({show: state.tasks.showTaskModal}))
+  const store = useSelectorTyped((state) => ({show: state.tasks.showTaskModal}), shallowEqual)
   const dispatch = useDispatch();
 
   // const handleClose = () => {
