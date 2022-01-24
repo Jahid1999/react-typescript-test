@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 import { shallowEqual } from "react-redux";
 import { useSelectorApi } from "../state-redux-toolkit/useSelectorApi";
+import { UiRoutes } from "../config/UIRoutes";
 
 export interface IUser {
   id: number;
@@ -40,7 +41,7 @@ const Users= () => {
     const navigate = useNavigate()
 
       const gotoHome = () => {
-        navigate('/')
+        navigate(UiRoutes.Root)
       }
 
     useEffect(() => {

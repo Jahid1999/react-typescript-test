@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { isNewExpression } from "typescript";
 import { stat } from "fs/promises";
 import { useSelectorApi } from "../state-redux-toolkit/useSelectorApi";
+import { UiRoutes } from "../config/UIRoutes";
 
 const api = axios.create({baseURL:'https://reqres.in/api'})
 
@@ -44,7 +45,7 @@ const Users= () => {
       }, []);
 
       const gotoHome = () => {
-        navigate('/')
+        navigate(UiRoutes.Root)
       }
       
       console.log(users);
