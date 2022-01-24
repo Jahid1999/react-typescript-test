@@ -4,12 +4,12 @@ import taskReducer from './features/taskSlice'
 import userReducer from './features/userSlice'
 import thunk from "redux-thunk"
 import resourceReducer from './features/resourceSlice'
+import { ReducerApi } from './features/apiSlice'
 
 export const store = configureStore({
     reducer: {
         tasks: taskReducer,
-        users: userReducer,
-        resources: resourceReducer
+        api: ReducerApi,
     },
     middleware: [thunk]
 })
