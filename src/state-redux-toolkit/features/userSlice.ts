@@ -1,5 +1,7 @@
 import { createAsyncThunk, createReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from 'axios';
+import { ApiRoutes } from "../../config/ApiRoutes";
+import { Intercept } from "../../intercepts";
 import { createCustomReducer } from "../createThunkReducer";
 
 const api = axios.create({baseURL:'https://reqres.in/api'})
@@ -19,16 +21,18 @@ const initialState : InitiInterface = { users:[], selectedUsers:[], statusFetchU
 // }
 
 export const fetchUsers = createAsyncThunk('users/fetchUserss', async () => {
-    const response = await  api.get<IUserResponse>('/users?page=2')
-    return response.data.data
+    const response = await  Intercept.get<IUserResponse>(`${ApiRoutes.GetUsers}`);
+    console.log(response);
+    
+    return response.response?.data
 })
 
-export const fetchResource = createAsyncThunk('users/fetchResource', async () => {
-    const response = await  api.get<IUserResponse>('/unknown')
-    console.log(response.data);
+// export const fetchResource = createAsyncThunk('users/fetchResource', async () => {
+//     const response = await  api.get<IUserResponse>('/unknown')
+//     console.log(response.data);
     
-    return response.data.total
-})
+//     return response.data.total
+// })
 
 
 // export const fetchUsers = () => {

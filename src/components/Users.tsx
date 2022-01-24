@@ -3,7 +3,7 @@ import { Spinner, Table } from 'react-bootstrap'
 
 import { shallowEqual, useDispatch } from 'react-redux';
 import {useSelectorTyped } from '../state-redux-toolkit/store';
-import {fetchUsers, fetchResource} from '../state-redux-toolkit/features/userSlice'
+import {fetchUsers} from '../state-redux-toolkit/features/userSlice'
 
 import axios from 'axios';
 import React from "react";
@@ -12,6 +12,7 @@ import { isNewExpression } from "typescript";
 import { stat } from "fs/promises";
 import { useSelectorApi } from "../state-redux-toolkit/useSelectorApi";
 import { UiRoutes } from "../config/UIRoutes";
+import { fetchResource } from "../state-redux-toolkit/features/resourceSlice";
 
 const api = axios.create({baseURL:'https://reqres.in/api'})
 
