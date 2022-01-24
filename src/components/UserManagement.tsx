@@ -18,7 +18,7 @@ export interface IUser {
 const Users= () => {
 
     const store = useSelectorTyped((state) => (
-      {users:state.users.users , searchKey:state.tasks.searchKey, isAPICalling: state.users.status}), shallowEqual)
+      {users:state.users.response , searchKey:state.tasks.searchKey, isAPICalling: state.users.status}), shallowEqual)
       
     const [users, setUsers] = useState<IUser[]>([])
     const [options, setOptions] = useState<IUser[]>([])
@@ -41,7 +41,8 @@ const Users= () => {
       }
 
     useEffect(() => {
-        setOptions(store.users)
+      if(store.users)
+          setOptions(store.users)
     }, []);
   //users.length? store.users : store.users.filter(u => {users.find(ur=> ur.id == u.id)})
     return (

@@ -3,11 +3,13 @@ import { createSelectorHook } from 'react-redux'
 import taskReducer from './features/taskSlice'
 import userReducer from './features/userSlice'
 import thunk from "redux-thunk"
+import resourceReducer from './features/resourceSlice'
 
 export const store = configureStore({
     reducer: {
         tasks: taskReducer,
-        users: userReducer
+        users: userReducer,
+        resources: resourceReducer
     },
     middleware: [thunk]
 })
