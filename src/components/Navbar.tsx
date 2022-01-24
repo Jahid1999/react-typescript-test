@@ -22,7 +22,7 @@ function Navibar() {
                     style={{ maxHeight: '30px' }}
                     navbarScroll
                 >
-                    <Nav.Link href="#action1">Home</Nav.Link>
+                    <Nav.Link as={Link} to={"/"}>Home</Nav.Link>
                     <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
                     {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -37,6 +37,9 @@ function Navibar() {
                     </Nav.Link>
                     <Nav.Link as={Link} to={"/users/management"} >
                         User Management
+                    </Nav.Link>
+                    <Nav.Link as={Link} to={"/others"} >
+                        Others
                     </Nav.Link>
                 </Nav>
                 <Form className="d-flex">

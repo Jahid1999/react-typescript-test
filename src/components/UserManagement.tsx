@@ -5,6 +5,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import Select from 'react-select'
+import { shallowEqual } from "react-redux";
+import { useSelectorApi } from "../state-redux-toolkit/useSelectorApi";
+import { UiRoutes } from "../config/UIRoutes";
 
 export interface IUser {
   id: number;
@@ -16,9 +19,13 @@ export interface IUser {
 
 const Users= () => {
 
-    const store = useSelectorTyped((state) => ({users:state.users.users , searchKey:state.tasks.searchKey, isAPICalling: state.users.isAPICalling}))
+    const store = useSelectorTyped((state) => (
+      {searchKey:state.tasks.searchKey}), shallowEqual)
+      
     const [users, setUsers] = useState<IUser[]>([])
     const [options, setOptions] = useState<IUser[]>([])
+
+    const fetchedUsers = useSelectorApi("user");
 
 
     const [selectedOption, setSelectedOption] = useState<IUser>({} as IUser);
@@ -34,17 +41,18 @@ const Users= () => {
     const navigate = useNavigate()
 
       const gotoHome = () => {
-        navigate('/')
+        navigate(UiRoutes.Root)
       }
 
     useEffect(() => {
-        setOptions(store.users)
+      if(fetchedUsers.response)
+          setOptions(fetchedUsers.response)
     }, []);
   //users.length? store.users : store.users.filter(u => {users.find(ur=> ur.id == u.id)})
     return (
       <div>
         {
-          store.isAPICalling && (
+          fetchedUsers.status === 'pending' && (
           <div className="row"> 
             <div className="col-2"> <h4>Loading....</h4></div>
             <div className="col-3">  <Spinner style={{marginBottom:27}} animation="border" variant="danger" /> </div>
@@ -54,9 +62,9 @@ const Users= () => {
         <button className="btn btn-block" style={{backgroundColor:'gray'}} onClick={gotoHome}>Go to Home</button>
        <Select options={options} 
        value={selectedOption}
-        onChange={handleChange} getOptionLabel={e => e?.first_name} />
+        onChange={handleChange} getOptionLabel={e => e?.first_name} placeholder="Select User" />
 
-        <br />
+        <br />  <br />
         <hr />
         <h4>Selected Customer's Table</h4>
 
